@@ -1,0 +1,28 @@
+.grid-holder{
+    max-width: 20rem;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: aqua;
+}
+
+.cell{
+    border: 1px solid black ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell:hover{
+    cursor: pointer;
+    background-color: antiquewhite;
+}
+
+.cell-chosen{
+    background-color: red;
+}
+
+.cell-chosen:hover{
+    background-color: red;
+}
