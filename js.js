@@ -11,8 +11,14 @@ document.addEventListener("DOMContentLoaded", function(){
         StartNewGrid();
     })
 
-    StartNewGrid();
+    NewGridCycle();
 });
+
+function NewGridCycle()
+{
+    console.log("New Grid");
+    StartNewGrid();
+}
 
 function StartNewGrid()
 {
