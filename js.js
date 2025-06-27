@@ -148,6 +148,7 @@ function CheckArithmeticProgressions(){
             if(integerArray.includes(c)){
                 HighlightAP(a, b, c);
                 DisplayProgressionAmount(b-a);
+                AddNewProgression(b-a);
                 return;
             }
         }
@@ -189,4 +190,11 @@ function DisplayProgressionAmount(amount)
     const progressionDisplay = document.getElementById("progressionDisplay");
 
     progressionDisplay.textContent = "Arithmetic Progression: " + amount;
+}
+
+function AddNewProgression(progressionAmount)
+{
+    const collectedProgressions = document.getElementById("collectedProgressions");
+
+    collectedProgressions.textContent = collectedProgressions.textContent + ", " + progressionAmount;
 }
