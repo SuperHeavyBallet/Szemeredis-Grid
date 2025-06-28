@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function(){
         console.log("Clicked Restart");
 
         ClearOldGrid();
+        ClearProgressions();
         StartNewGrid();
     })
 
@@ -197,4 +198,14 @@ function AddNewProgression(progressionAmount)
     const collectedProgressions = document.getElementById("collectedProgressions");
 
     collectedProgressions.textContent = collectedProgressions.textContent + ", " + progressionAmount;
+}
+
+function ClearProgressions()
+{
+    const storedProgressions = document.getElementById("selectIntegersHolder");
+    
+    while(storedProgressions.childElementCount > 0)
+    {
+        storedProgressions.removeChild(storedProgressions.lastChild);
+    }
 }
