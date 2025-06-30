@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function(){
     
     const restartButton = document.getElementById("restartButton");
 
+
+    let countProgression = 3;
+
     restartButton.addEventListener("click", (e) =>{
         e.preventDefault();
 
