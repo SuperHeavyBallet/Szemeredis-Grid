@@ -136,26 +136,69 @@ function DisplayPercentageChosen()
 
 function CheckArithmeticProgressions(){
 
+    // Gather the selected Integers in whole and build an ordered array from them
     let integerArray = Array.from(document.querySelectorAll(".displayInteger"))
     .map(el => parseInt(el.textContent, 10))
     .sort((a, b) => a - b);
 
+    let foundProgressions = [];
+
+///Check all pairs (a, b) in the array, where b comes after a, 
+//to find a constant difference d, 
     for(let i = 0; i < integerArray.length; i++)
     {
         for(let j = i + 1; j < integerArray.length; j++)
         {
+            //Create values for each element and the next ie i + 1, i + 2, i + 3 etc
             let a = integerArray[i];
             let b = integerArray[j];
+
+            
+
+            //Create value for the difference between those two
             let d = b - a;
+            //Create value for the next integer + the difference between those two
             let c = b + d;
 
-            if(integerArray.includes(c)){
-                HighlightAP(a, b, c);
-                DisplayProgressionAmount(b-a);
-                AddNewProgression(b-a);
-                return;
+             // Extension for four step progression
+             let e = c + d;        // 4th value
+
+             let hasC = integerArray.includes(c);
+            let hasE = integerArray.includes(e);
+
+
+            //Check if the array includes a next integer of equal difference from c as a to b,
+            //If it does, then a 3 step progression is present with the arithmetic value of c
+            
+            if (hasC) {
+                // Found 3-term AP
+                foundProgressions.push([a, b, c]);
+
+                if (hasE) {
+                    // Also found 4-term AP
+                    foundProgressions.push([a, b, c, e]);
+                }
             }
+    
+           
+            /*
+            if (
+                integerArray.includes(c) &&
+                integerArray.includes(e)
+            ) {
+                HighlightAP(a, b, c, e);
+                DisplayProgressionAmount(d);
+                AddNewProgression(d);
+                return;
+            }*/
         }
+    }
+
+    // You can now display or handle them all
+    for (let progression of foundProgressions) {
+        HighlightAP(...progression);
+        DisplayProgressionAmount(progression[1] - progression[0]);
+        AddNewProgression(progression[1] - progression[0]);
     }
 }
 
