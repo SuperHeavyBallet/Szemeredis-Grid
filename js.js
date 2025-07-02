@@ -206,6 +206,12 @@ function HighlightAP(a,b,c)
 {
     let selected = Array.from(document.querySelectorAll(".displayInteger"));
 
+    for(let i = 0; i < selected.length; i++)
+    {
+        selected[i].classList.remove("highlight-ap");
+    }
+
+
     [a,b,c].forEach(val => {
         let match = selected.find(el => parseInt(el.textContent, 10) === val);
         if(match) match.classList.add("highlight-ap");
