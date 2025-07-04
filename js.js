@@ -1,7 +1,9 @@
+let collectedProgressionArray = [];
+
 document.addEventListener("DOMContentLoaded", function(){
     
     const restartButton = document.getElementById("restartButton");
-    let collectedProgressionArray = [];
+    
 
 
     let countProgression = 3;
@@ -253,11 +255,14 @@ function AddNewProgression(progressionAmount)
     collectedProgressionArray.push(progressionAmount);
     let newString = "";
 
-    for(let i = 0; i < collectedProgressionsArray.length; i++)
+    for(let i = 0; i < collectedProgressionArray.length; i++)
 
     {
-        newString = newString + ", [ " + collectedProgressionsArray[i] + " ]"
+        newString = newString + ", [ " + collectedProgressionArray[i] + " ]"
     }
+
+    console.log(newString);
+    collectedProgressions.textContent = "";
 
     collectedProgressions.textContent = newString;
 }
