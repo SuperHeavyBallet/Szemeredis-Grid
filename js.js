@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function(){
 function NewGridCycle()
 {
     console.log("New Grid");
+    console.log(collectedProgressionArray);
     StartNewGrid();
 }
 
