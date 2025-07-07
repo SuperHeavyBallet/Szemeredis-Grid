@@ -1,39 +1,64 @@
 let collectedProgressionArray = [];
+let progressionAmountInput;
+let countProgression = 100;
+let restartButton;
+let gridSizeInput;
+let gridSize = 100;
 
 document.addEventListener("DOMContentLoaded", function(){
-    
-    const restartButton = document.getElementById("restartButton");
-    
 
+    SetupProgressionInput();
+    SetupRestartButton();
+    SetUpGridSize();
+    StartNewGrid(gridSize);
+});
 
-    let countProgression = 3;
+function SetUpGridSize()
+{
+    gridSizeInput = document.getElementById("gridSize");
+    gridSizeInput.addEventListener("input", (e) =>{
+        e.preventDefault();
+        console.log(gridSizeInput.value);
+        gridSize = parseInt(gridSizeInput.value);
+    })
+}
+
+function SetupProgressionInput()
+{
+    progressionAmountInput = document.getElementById("progressionAmount");
+
+    progressionAmountInput.addEventListener("change", (e) => {
+        e.preventDefault();
+        countProgression = parseInt(progressionAmountInput.value);
+    })
+}
+
+function SetupRestartButton()
+{
+    restartButton = document.getElementById("restartButton");
 
     restartButton.addEventListener("click", (e) =>{
         e.preventDefault();
 
-        console.log("Clicked Restart");
-
         ClearOldGrid();
         ClearProgressions();
-        StartNewGrid();
+        StartNewGrid(gridSize);
     })
-
-    NewGridCycle();
-});
-
-function NewGridCycle()
-{
-    console.log("New Grid");
-    console.log(collectedProgressionArray);
-    StartNewGrid();
 }
 
-function StartNewGrid()
+function GetGridSize()
 {
-    let gridSize = 100;
+
+}
+
+
+function StartNewGrid(gridSize)
+{
+    
 
     GenerateNewGrid(gridSize);
 }
+
 
 function ClearOldGrid(){
 
