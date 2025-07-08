@@ -7,20 +7,17 @@ let gridSize = 100;
 
 document.addEventListener("DOMContentLoaded", function(){
 
+    SetUpNewGrid();
+   
+});
+
+function SetUpNewGrid()
+{
     SetupProgressionInput();
     SetupRestartButton();
     SetUpGridSize();
-    StartNewGrid(gridSize);
-});
+    GenerateNewGrid(gridSize);
 
-function SetUpGridSize()
-{
-    gridSizeInput = document.getElementById("gridSize");
-    gridSizeInput.addEventListener("input", (e) =>{
-        e.preventDefault();
-        console.log(gridSizeInput.value);
-        gridSize = parseInt(gridSizeInput.value);
-    })
 }
 
 function SetupProgressionInput()
@@ -42,23 +39,19 @@ function SetupRestartButton()
 
         ClearOldGrid();
         ClearProgressions();
-        StartNewGrid(gridSize);
+        SetUpNewGrid();
     })
 }
 
-function GetGridSize()
+function SetUpGridSize()
 {
-
+    gridSizeInput = document.getElementById("gridSize");
+    gridSizeInput.addEventListener("input", (e) =>{
+        e.preventDefault();
+        console.log(gridSizeInput.value);
+        gridSize = parseInt(gridSizeInput.value);
+    })
 }
-
-
-function StartNewGrid(gridSize)
-{
-    
-
-    GenerateNewGrid(gridSize);
-}
-
 
 function ClearOldGrid(){
 
@@ -67,9 +60,7 @@ function ClearOldGrid(){
     while(gridHolder.childElementCount > 0)
     {
         gridHolder.removeChild(gridHolder.lastChild);
-    }
-
-    
+    } 
 }
 
 function GenerateNewGrid(gridSize)
@@ -111,27 +102,19 @@ function AddClickEventToCell(cell)
         SortDisplayIntegers();
         CheckArithmeticProgressions();
         DisplayPercentageChosen();
-
-
-        
+    
     } , { once: true } );
 };
-
-
 
 function SortDisplayIntegers()
 {
     let integerArray = Array.from(document.querySelectorAll(".displayInteger"));
-    let sortedArray = [];
-
-
 
     integerArray.sort((a, b) => {
         const valA = parseInt(a.textContent, 10);
         const valB = parseInt(b.textContent, 10);
         return valA - valB;
       });
-
 
       const selectIntegersHolder = document.getElementById("selectIntegersHolder");
 
@@ -147,7 +130,6 @@ function SortDisplayIntegers()
 
         selectIntegersHolder.appendChild(newInteger);
       })
-
 
 }
 
@@ -172,8 +154,8 @@ function CheckArithmeticProgressions(){
 
     let foundProgressions = [];
 
-///Check all pairs (a, b) in the array, where b comes after a, 
-//to find a constant difference d, 
+    ///Check all pairs (a, b) in the array, where b comes after a, 
+    //to find a constant difference d, 
     for(let i = 0; i < integerArray.length; i++)
     {
         for(let j = i + 1; j < integerArray.length; j++)
@@ -182,44 +164,33 @@ function CheckArithmeticProgressions(){
             let a = integerArray[i];
             let b = integerArray[j];
 
-            
-
             //Create value for the difference between those two
             let d = b - a;
             //Create value for the next integer + the difference between those two
             let c = b + d;
 
-             // Extension for four step progression
-             let e = c + d;        // 4th value
+            // Extension for four step progression
+            let e = c + d;        // 4th value
 
-             let hasC = integerArray.includes(c);
+            let hasC = integerArray.includes(c);
             let hasE = integerArray.includes(e);
 
-
-            //Check if the array includes a next integer of equal difference from c as a to b,
-            //If it does, then a 3 step progression is present with the arithmetic value of c
-            
-            if (hasC) {
-                // Found 3-term AP
-                foundProgressions.push([a, b, c]);
+            // FIX - This seems to double add, so if 3 AP is present, add and then also it can add 4 AP as well, not instead
+            if (hasC) 
+            {
 
                 if (hasE) {
-                    // Also found 4-term AP
                     foundProgressions.push([a, b, c, e]);
+                    console.log("4 AP");
                 }
+                else{
+                    foundProgressions.push([a, b, c]);
+                    console.log("3 AP");
+                }
+
+                
             }
     
-           
-            /*
-            if (
-                integerArray.includes(c) &&
-                integerArray.includes(e)
-            ) {
-                HighlightAP(a, b, c, e);
-                DisplayProgressionAmount(d);
-                AddNewProgression(d);
-                return;
-            }*/
         }
     }
 

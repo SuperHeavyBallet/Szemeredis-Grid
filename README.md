@@ -12,3 +12,5 @@ Also, I want to experiment with higher count progressions (Potentially allowing 
 
 
 Currently, further progressions can be sought after finding one, but there is no ouput of those prior findings, so probably a text display recording the numbers and the count between them s hould be added
+
+Add in user input to select progression count
