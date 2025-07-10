@@ -93,11 +93,13 @@ function AddClickEventToCell(cell)
         
         cell.classList.add("cell-chosen");
 
+        
         let newInteger = document.createElement("div");
         newInteger.textContent = cell.textContent;
         newInteger.classList.add("displayInteger");
 
         selectIntegersHolder.appendChild(newInteger);
+        
 
         SortDisplayIntegers();
         CheckArithmeticProgressions();
@@ -188,18 +190,18 @@ function CheckArithmeticProgressions(){
                     console.log("3 AP");
                 }
 
-                
+                // You can now display or handle them all
+                for (let progression of foundProgressions) {
+                    HighlightAP(...progression);
+                    DisplayProgressionAmount(progression[1] - progression[0]);
+                    AddNewProgression(progression[1] - progression[0]);
+                }
             }
     
         }
     }
 
-    // You can now display or handle them all
-    for (let progression of foundProgressions) {
-        HighlightAP(...progression);
-        DisplayProgressionAmount(progression[1] - progression[0]);
-        AddNewProgression(progression[1] - progression[0]);
-    }
+    
 }
 
 function HighlightAP(a,b,c)
@@ -248,20 +250,51 @@ function DisplayProgressionAmount(amount)
 function AddNewProgression(progressionAmount)
 {
     const collectedProgressions = document.getElementById("collectedProgressions");
+    
 
-    collectedProgressionArray.push(progressionAmount);
-    let newString = "";
+    let canAddProgression = true;
 
-    for(let i = 0; i < collectedProgressionArray.length; i++)
-
+    for (let i = 0; i < collectedProgressionArray.length; i++)
     {
-        newString = newString + ", [ " + collectedProgressionArray[i] + " ]"
+
+       
+        if(collectedProgressionArray[i] === progressionAmount)
+        {
+            canAddProgression = false;
+            break;
+        }
+        
     }
 
-    console.log(newString);
-    collectedProgressions.textContent = "";
+    if(canAddProgression)
+    {
+        collectedProgressionArray.push(progressionAmount);
+        let newProgression = document.createElement('p');
+        newProgression.classList.add("new-progression-display")
+        
+        newProgression.textContent = progressionAmount;
 
-    collectedProgressions.textContent = newString;
+        newProgression.addEventListener("click", (e) =>{
+            e.preventDefault();
+            window.alert(newProgression.textContent);
+        })
+
+        collectedProgressions.appendChild(newProgression);
+    }
+    
+    console.log("HERE " , collectedProgressionArray);
+
+
+
+    let collectedProgressionsChildren = Array.from(collectedProgressions.childNodes);
+
+    console.log(collectedProgressionsChildren);
+
+    
+
+    
+
+    //collectedProgressions.textContent = newString;
 }
 
 function ClearProgressions()

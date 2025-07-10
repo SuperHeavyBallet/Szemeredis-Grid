@@ -14,3 +14,8 @@ Also, I want to experiment with higher count progressions (Potentially allowing 
 Currently, further progressions can be sought after finding one, but there is no ouput of those prior findings, so probably a text display recording the numbers and the count between them s hould be added
 
 Add in user input to select progression count x
+
+Need to refactor. The current strip 'selectIntegersHolder" does not really add anything now, it's basically a small version of the grid.
+
+Instead, we can switch to collecting the progressions as individual elements ie 2, 20, 40 etc 0 and on clicking one of those, the suitable
+squares in the grid will be higlighted.
