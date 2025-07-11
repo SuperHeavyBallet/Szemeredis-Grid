@@ -5,6 +5,15 @@ let restartButton;
 let gridSizeInput;
 let gridSize = 100;
 
+let collectedProgressionsForDisplay = [];
+
+class ProgressionForDisplay{
+    constructor(progression, cells){
+        this.integer = progression;
+        this.cells = cells;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
     SetUpNewGrid();
@@ -102,7 +111,7 @@ function AddClickEventToCell(cell)
         
 
         SortDisplayIntegers();
-        CheckArithmeticProgressions();
+        CheckArithmeticProgressions(cell);
         DisplayPercentageChosen();
     
     } , { once: true } );
@@ -147,7 +156,7 @@ function DisplayPercentageChosen()
     percentageDisplay.textContent = totalChosenCells +  " / " + cellCount;
 }
 
-function CheckArithmeticProgressions(){
+function CheckArithmeticProgressions(cell){
 
     // Gather the selected Integers in whole and build an ordered array from them
     let integerArray = Array.from(document.querySelectorAll(".displayInteger"))
@@ -195,6 +204,7 @@ function CheckArithmeticProgressions(){
                     HighlightAP(...progression);
                     DisplayProgressionAmount(progression[1] - progression[0]);
                     AddNewProgression(progression[1] - progression[0]);
+                    AddNewProgressionCellsObject(progression[1] - progression[0], cell);
                 }
             }
     
@@ -247,8 +257,17 @@ function DisplayProgressionAmount(amount)
     progressionDisplay.textContent = "Arithmetic Progression: " + amount;
 }
 
+function AddNewProgressionCellsObject(progressionAmount, cell)
+{
+    let newStoredProgression = new ProgressionForDisplay(progressionAmount, cell);
+
+    console.log(newStoredProgression);
+}
+
 function AddNewProgression(progressionAmount)
 {
+
+    
     const collectedProgressions = document.getElementById("collectedProgressions");
     
 

@@ -19,3 +19,9 @@ Need to refactor. The current strip 'selectIntegersHolder" does not really add a
 
 Instead, we can switch to collecting the progressions as individual elements ie 2, 20, 40 etc 0 and on clicking one of those, the suitable
 squares in the grid will be higlighted.
+
+Total Refactor -
+
+Create master array of each cell, with key : value of integer : assigned progressions amount as array [2,3,4] etc
+
+If Collected progressions are clicked, cells that follow that progression are highlighted 
