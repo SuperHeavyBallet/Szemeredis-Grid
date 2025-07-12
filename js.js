@@ -7,12 +7,19 @@ let gridSize = 100;
 
 let collectedProgressionsForDisplay = [];
 
+let ArrayOfCellObjects = [];
+
 class ProgressionForDisplay{
-    constructor(progression, cells){
-        this.integer = progression;
-        this.cells = cells;
+    constructor(id, cell, progressions = []){
+        this.id = id;
+        this.cell = cell;
+        this.progressions = progressions;
     }
 }
+
+//Each cell object should contain:
+// Cell integer as KEY
+// Progressions as array of ints
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -82,6 +89,7 @@ function GenerateNewGrid(gridSize)
     {
         for(let j = 0; j < gridSide; j++)
         {
+            
             currentIndex ++;
 
             let newCell = document.createElement("div");
@@ -90,8 +98,15 @@ function GenerateNewGrid(gridSize)
 
             AddClickEventToCell(newCell);
             gridHolder.appendChild(newCell);
+
+            AddNewCellObject(currentIndex, newCell);
+            
+
+            
         }
     }
+
+    console.log(ArrayOfCellObjects[0]);
 }
 
 function AddClickEventToCell(cell)
@@ -204,7 +219,7 @@ function CheckArithmeticProgressions(cell){
                     HighlightAP(...progression);
                     DisplayProgressionAmount(progression[1] - progression[0]);
                     AddNewProgression(progression[1] - progression[0]);
-                    AddNewProgressionCellsObject(progression[1] - progression[0], cell);
+                    // Update Cell
                 }
             }
     
@@ -257,11 +272,11 @@ function DisplayProgressionAmount(amount)
     progressionDisplay.textContent = "Arithmetic Progression: " + amount;
 }
 
-function AddNewProgressionCellsObject(progressionAmount, cell)
-{
-    let newStoredProgression = new ProgressionForDisplay(progressionAmount, cell);
 
-    console.log(newStoredProgression);
+function AddNewCellObject(id, cell)
+{
+    let newCellObject = new ProgressionForDisplay(id, cell);
+    ArrayOfCellObjects.push(newCellObject);
 }
 
 function AddNewProgression(progressionAmount)
